@@ -417,6 +417,7 @@ func (s *Server) Get(req *spb.GetRequest, stream spb.GRIBI_GetServer) error {
 		}
 	}()
 
+	log.V(2).Infof("initiating Get(): %v", req)
 	go s.doGet(req, msgCh, doneCh, stopCh, errCh)
 
 	var done bool
