@@ -443,6 +443,7 @@ func (s *Server) Flush(ctx context.Context, req *spb.FlushRequest) (*spb.FlushRe
 		return nil, err
 	}
 
+	log.V(2).Infof("initiating Flush(): %v", req)
 	nis := []string{}
 	switch t := req.GetNetworkInstance().(type) {
 	case *spb.FlushRequest_All:
