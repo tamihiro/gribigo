@@ -852,6 +852,7 @@ func (c *Client) StopSending() {
 // that pending transactions are enqueued into the pending queue where they have
 // a specified ID.
 func (c *Client) handleModifyRequest(m *spb.ModifyRequest) error {
+	log.V(2).Infof("[debugging 02] initiating handleModifyRequest(): %v", m)
 	// Add any pending operations to the pending queue.
 	for _, o := range m.Operation {
 		if err := c.addPendingOp(o); err != nil {
@@ -860,10 +861,12 @@ func (c *Client) handleModifyRequest(m *spb.ModifyRequest) error {
 	}
 
 	if m.ElectionId != nil {
+		log.V(2).Infof("[debugging 03] calling c.updatePendingElection(): %v", m.ElectionId)
 		c.updatePendingElection(m.ElectionId)
 	}
 
 	if m.Params != nil {
+		log.V(2).Infof("[debugging 04] calling c.pendingSessionParams(): %v", m.Params)
 		c.pendingSessionParams(m.Params)
 	}
 
