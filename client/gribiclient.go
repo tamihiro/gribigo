@@ -835,6 +835,7 @@ func (c *Client) StartSending() {
 	defer c.qs.sendMu.Unlock()
 	for _, m := range c.qs.sendq {
 		log.V(2).Infof("sending %s to modify channel", m)
+		log.V(2).Info("*** yahho ***")
 		c.q(m)
 	}
 	c.qs.sendq = []*spb.ModifyRequest{}
