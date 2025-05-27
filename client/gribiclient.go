@@ -804,10 +804,11 @@ func chIsClosed(ch <-chan struct{}) bool {
 // q is the internal implementation of queue that writes the ModifyRequest to
 // the channel to be sent.
 func (c *Client) q(m *spb.ModifyRequest) {
+	log.V(2).Infof("[debugging 00] initiating q(): %v", m)
 	c.awaiting.RLock()
 	defer c.awaiting.RUnlock()
-
 	if !chIsClosed(c.sendExitCh) {
+		log.V(2).Infof("[debugging 01] sending request to modifyCh: %v", m)
 		c.qs.modifyCh <- m
 	}
 }
