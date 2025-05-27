@@ -870,6 +870,7 @@ func (c *Client) handleModifyRequest(m *spb.ModifyRequest) error {
 		c.pendingSessionParams(m.Params)
 	}
 
+	log.V(2).Infof("[debugging 05] finishing handleModifyRequest(): %v", m.Params)
 	return nil
 }
 
